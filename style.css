@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{ 
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #181818;
+    color: #fff;
+    user-select: none;
+}
+
+
+
+
+
+#main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+
+
+
+
+
+
+.line{
+    width: 0;
+    height: 3px;
+    background-color: #bdbdbd;
+    border-radius: 8px;
+    transform-origin: left center;
+    transform: rotate(0deg);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+
+
+
+
+
+#screen{
+    width: 320px;
+    height: 320px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+
+.slot{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+
+.slot_selected div{ 
+    border-color: #fff !important;
+}
+.slot_error div{
+    border-color: #dc3545 !important;
+}
+.slot_pass div{
+    border-color: #28a745 !important;
+}
+
+
+.slot_selected div::after{
+    background-color: #fff;
+}
+
+
+
+.slot div{
+    width: 50%;
+    height: 50%; 
+    border: 2px solid transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slot div::after{
+    content: '';
+    display: block;
+    width: 25%;
+    height: 25%;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    z-index: 1;
+}
