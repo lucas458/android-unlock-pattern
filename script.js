@@ -49,49 +49,49 @@ document.querySelectorAll(".slot div").forEach((e, i) => {
 
     e.onmousemove = (event) => {
 
-        if ( document.querySelector('.slot_selected_start') && can_put_password ){
-
-            if ( !e.parentElement.classList.contains('slot_locked') ){
-
-                e.parentElement.classList.add('slot_selected', 'slot_locked');
-                
-                let lastIndex = list_selected_index.slice(-1);
-                let oldSlot  = screen_element.children[lastIndex];
-
-                for (let j = 0; j < positions.length; j++){
-                    if ( lastIndex == positions[j][0] && i == positions[j][1] || lastIndex == positions[j][1] && i == positions[j][0] ){
-                        screen_element.children[ positions[j][2] ].classList.add('slot_selected', 'slot_locked');
-                        list_selected_index.push( positions[j][2] );
-                        break;
-                    }
-                }
-
-                list_selected_index.push(i);
-
-                let center_slot = {
-                    x: e.offsetLeft + e.offsetWidth/2,
-                    y: e.offsetTop + e.offsetHeight/2
-                };
-                
-                let center_slot_old = {
-                    x: oldSlot.offsetLeft + oldSlot.offsetWidth/2,
-                    y: oldSlot.offsetTop + oldSlot.offsetHeight/2
-                };
-
-                let angle = Math.atan2(center_slot_old.x - center_slot.x, center_slot_old.y - center_slot.y);
-                let dist  = Math.hypot(center_slot_old.x - center_slot.x, center_slot_old.y - center_slot.y);
-                angle = 360 - (angle * 180 / Math.PI + 180);
-
-                
-                let currentLine = list_line.children[ list_line.children.length - 1 ];
-                currentLine.style.transform = `rotate(${angle+90}deg)`;
-                currentLine.style.width = dist + 'px';
-
-                addLineAt(center_slot.x, center_slot.y);
-                
-            }
-
+        if ( document.querySelector('.slot_selected_start') == null || e.parentElement.classList.contains('slot_locked') || !can_put_password ){
+            return;
         }
+
+        e.parentElement.classList.add('slot_selected', 'slot_locked');
+        
+        let lastIndex = list_selected_index.slice(-1);
+        let oldSlot  = screen_element.children[lastIndex];
+
+        for (let j = 0; j < positions.length; j++){
+            if ( lastIndex == positions[j][0] && i == positions[j][1] || lastIndex == positions[j][1] && i == positions[j][0] ){
+                screen_element.children[ positions[j][2] ].classList.add('slot_selected', 'slot_locked');
+                list_selected_index.push( positions[j][2] );
+                break;
+            }
+        }
+
+        list_selected_index.push(i);
+
+        let center_slot = {
+            x: e.offsetLeft + e.offsetWidth/2,
+            y: e.offsetTop + e.offsetHeight/2
+        };
+        
+        let center_slot_old = {
+            x: oldSlot.offsetLeft + oldSlot.offsetWidth/2,
+            y: oldSlot.offsetTop + oldSlot.offsetHeight/2
+        };
+
+        let angle = Math.atan2(center_slot_old.x - center_slot.x, center_slot_old.y - center_slot.y);
+        let dist  = Math.hypot(center_slot_old.x - center_slot.x, center_slot_old.y - center_slot.y);
+        angle = 360 - (angle * 180 / Math.PI + 180);
+
+        
+        let currentLine = list_line.children[ list_line.children.length - 1 ];
+        currentLine.style.transform = `rotate(${angle+90}deg)`;
+        currentLine.style.width = dist + 'px';
+
+        addLineAt(center_slot.x, center_slot.y);
+                
+             
+
+         
 
     };
 
